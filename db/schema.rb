@@ -13,6 +13,16 @@
 
 ActiveRecord::Schema.define(version: 50161230223301) do
 
+  create_table "answers", force: :cascade do |t|
+    t.text     "body"
+    t.integer  "user_id"
+    t.integer  "question_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "issue_description"
+    t.text     "action_taken"
+  end
+
   create_table "country_of_origins", force: :cascade do |t|
     t.string   "name"
     t.datetime "fdate"
@@ -22,6 +32,14 @@ ActiveRecord::Schema.define(version: 50161230223301) do
     t.datetime "updated_at",    null: false
   end
 
+  create_table "part_numbers", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "sort"
+    t.integer  "active_status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "pfeatures", force: :cascade do |t|
     t.string   "name"
     t.datetime "fdate"
@@ -29,6 +47,14 @@ ActiveRecord::Schema.define(version: 50161230223301) do
     t.integer  "sort"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+  end
+
+  create_table "process_steps", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "sort"
+    t.integer  "active_status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "product_features", force: :cascade do |t|
@@ -56,6 +82,17 @@ ActiveRecord::Schema.define(version: 50161230223301) do
 
   add_index "products", ["country_of_origin_id"], name: "index_products_on_country_of_origin_id"
 
+  create_table "questions", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "survey_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "qtype",                default: 0
+    t.text     "question_note"
+    t.text     "question_whatlookfor"
+    t.text     "question_if_no"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
@@ -63,6 +100,13 @@ ActiveRecord::Schema.define(version: 50161230223301) do
     t.integer  "sort"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+  end
+
+  create_table "surveys", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "users", force: :cascade do |t|
